@@ -9,4 +9,12 @@ terraform {
       version = "~> 3.0"
     }
   }
+  cloud {
+    organization = "usydstaging"
+
+    workspaces {
+      name = "argocd_eks"
+    }
+  }
+
 }
