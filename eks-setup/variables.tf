@@ -3,3 +3,10 @@ variable "cluster-name" {
   type        = string
   default     = "demo"
 }
+
+variable "name_prefix" {
+  description = "argocdprj-"
+  type        = string
+  default     = "demo"
+}
+
