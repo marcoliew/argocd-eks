@@ -5,8 +5,8 @@ variable "cluster-name" {
 }
 
 variable "name_prefix" {
-  description = "argocdprj-"
+  description = ""
   type        = string
-  default     = "demo"
+  default     = "argocdprj-"
 }
 
