@@ -1,5 +1,5 @@
-resource "aws_iam_role" "argocdprj-eks-role" {
-  name = "${var.name_prefix}eks-cluster"
+resource "aws_iam_role" "eks-role" {
+  name = "${var.name_prefix}eks-cluster-role"
 
   assume_role_policy = <<POLICY
 {
@@ -17,13 +17,13 @@ resource "aws_iam_role" "argocdprj-eks-role" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "argocdprj-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "eks-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.argocdprj-eks-role.name
 }
 
-resource "aws_iam_role" "nodes" {
-  name = "${var.name_prefix}eks-node-group-nodes"
+resource "aws_iam_role" "nodes-role" {
+  name = "${var.name_prefix}eks-nodes-role"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -39,41 +39,41 @@ resource "aws_iam_role" "nodes" {
 
 resource "aws_iam_role_policy_attachment" "nodes-AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.nodes.name
+  role       = aws_iam_role.nodes-role.name
 }
 
 resource "aws_iam_role_policy_attachment" "nodes-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.nodes.name
+  role       = aws_iam_role.nodes-role.name
 }
 
 resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.nodes.name
+  role       = aws_iam_role.nodes-role.name
 }
 resource "aws_eks_cluster" "argocdprj_eks" {
   name     = var.cluster-name
-  role_arn = aws_iam_role.argocdprj-eks-role.arn
+  role_arn = aws_iam_role.eks-role.arn
 
   vpc_config {
     subnet_ids = [
-      aws_subnet.private-ap-southeast-1a.id,
-      aws_subnet.private-ap-southeast-1b.id,
-      aws_subnet.public-ap-southeast-1a.id,
-      aws_subnet.public-ap-southeast-1b.id
+      aws_subnet.private-ap-southeast-2a.id,
+      aws_subnet.private-ap-southeast-2b.id,
+      aws_subnet.public-ap-southeast-2a.id,
+      aws_subnet.public-ap-southeast-2b.id
     ]
     endpoint_private_access = false
     endpoint_public_access = true
   }
 
-  depends_on = [aws_iam_role_policy_attachment.argocdprj-AmazonEKSClusterPolicy]
+  depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy]
 }
 
 
 resource "aws_eks_node_group" "private-nodes" {
   cluster_name    = aws_eks_cluster.argocdprj_eks.name
   node_group_name = "${var.name_prefix}private-nodes"
-  node_role_arn   = aws_iam_role.nodes.arn
+  node_role_arn   = aws_iam_role.nodes-role.arn
 
   subnet_ids = [
     aws_subnet.private-ap-southeast-2a.id,
