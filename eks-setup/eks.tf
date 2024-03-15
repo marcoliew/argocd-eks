@@ -1,5 +1,5 @@
-resource "aws_iam_role" "demo" {
-  name = "eks-cluster-demo"
+resource "aws_iam_role" "argocdprj-eks-role" {
+  name = "${var.name_prefix}eks-cluster"
 
   assume_role_policy = <<POLICY
 {
@@ -17,13 +17,13 @@ resource "aws_iam_role" "demo" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "demo-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "argocdprj-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.demo.name
+  role       = aws_iam_role.argocdprj-eks-role.name
 }
 
 resource "aws_iam_role" "nodes" {
-  name = "eks-node-group-nodes"
+  name = "${var.name_prefix}eks-node-group-nodes"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -51,9 +51,9 @@ resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadO
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.nodes.name
 }
-resource "aws_eks_cluster" "demo" {
+resource "aws_eks_cluster" "argocdprj_eks" {
   name     = var.cluster-name
-  role_arn = aws_iam_role.demo.arn
+  role_arn = aws_iam_role.argocdprj-eks-role.arn
 
   vpc_config {
     subnet_ids = [
@@ -66,13 +66,13 @@ resource "aws_eks_cluster" "demo" {
     endpoint_public_access = true
   }
 
-  depends_on = [aws_iam_role_policy_attachment.demo-AmazonEKSClusterPolicy]
+  depends_on = [aws_iam_role_policy_attachment.argocdprj-AmazonEKSClusterPolicy]
 }
 
 
 resource "aws_eks_node_group" "private-nodes" {
-  cluster_name    = aws_eks_cluster.demo.name
-  node_group_name = "private-nodes"
+  cluster_name    = aws_eks_cluster.argocdprj_eks.name
+  node_group_name = "${var.name_prefix}private-nodes"
   node_role_arn   = aws_iam_role.nodes.arn
 
   subnet_ids = [
