@@ -22,24 +22,24 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSClusterPolicy" {
   role       = aws_iam_role.eks-role.name
 }
 
-# resource "aws_iam_role" "nodes-role" {
-#   name = "${var.name_prefix}eks-nodes-role"
+resource "aws_iam_role" "nodes-role" {
+  name = "${var.name_prefix}eks-nodes-role"
 
-#   assume_role_policy = <<EOF
-# {
-#   "Version": "2012-10-17",
-#   "Statement": [
-#     {
-#       "Effect": "Allow",
-#       "Principal": {
-#         "Service": "ec2.amazonaws.com"
-#       },
-#       "Action": "sts:AssumeRole"
-#     }
-#   ]
-# }
-# EOF
-# }
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
 
 # resource "aws_iam_role_policy_attachment" "nodes-AmazonEKSWorkerNodePolicy" {
 #   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
