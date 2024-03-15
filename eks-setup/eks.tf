@@ -56,23 +56,23 @@ resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadO
   role       = aws_iam_role.nodes-role.name
 }
 
-# resource "aws_eks_cluster" "argocdprj_eks" {
-#   name     = var.cluster-name
-#   role_arn = aws_iam_role.eks-role.arn
+resource "aws_eks_cluster" "argocdprj_eks" {
+  name     = var.cluster-name
+  role_arn = aws_iam_role.eks-role.arn
 
-#   vpc_config {
-#     subnet_ids = [
-#       aws_subnet.private-ap-southeast-2a.id,
-#       aws_subnet.private-ap-southeast-2b.id,
-#       aws_subnet.public-ap-southeast-2a.id,
-#       aws_subnet.public-ap-southeast-2b.id
-#     ]
-#     endpoint_private_access = false
-#     endpoint_public_access = true
-#   }
+  vpc_config {
+    subnet_ids = [
+      aws_subnet.private-ap-southeast-2a.id,
+      aws_subnet.private-ap-southeast-2b.id,
+      aws_subnet.public-ap-southeast-2a.id,
+      aws_subnet.public-ap-southeast-2b.id
+    ]
+    endpoint_private_access = false
+    endpoint_public_access = true
+  }
 
-#   depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy]
-# }
+  depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy]
+}
 
 
 # resource "aws_eks_node_group" "private-nodes" {
