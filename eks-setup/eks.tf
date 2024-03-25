@@ -75,37 +75,37 @@ resource "aws_eks_cluster" "argocdprj_eks" {
 }
 
 
-# resource "aws_eks_node_group" "private-nodes" {
-#   cluster_name    = aws_eks_cluster.argocdprj_eks.name
-#   node_group_name = "${var.name_prefix}private-nodes"
-#   node_role_arn   = aws_iam_role.nodes-role.arn
+resource "aws_eks_node_group" "private_nodes" {
+  cluster_name    = aws_eks_cluster.argocdprj_eks.name
+  node_group_name = "${var.name_prefix}private-nodes"
+  node_role_arn   = aws_iam_role.nodes_role.arn
 
-#   subnet_ids = [
-#     aws_subnet.private-ap-southeast-2a.id,
-#     aws_subnet.private-ap-southeast-2b.id
-#   ]
+  subnet_ids = [
+    aws_subnet.private-ap-southeast-2a.id,
+    aws_subnet.private-ap-southeast-2b.id
+  ]
 
-#   capacity_type  = "ON_DEMAND"
-#   instance_types = ["t3.small"]
+  capacity_type  = "ON_DEMAND"
+  instance_types = ["t3.small"]
 
-#   scaling_config {
-#     desired_size = 1
-#     max_size     = 5
-#     min_size     = 0
-#   }
+  scaling_config {
+    desired_size = 1
+    max_size     = 5
+    min_size     = 0
+  }
 
-#   update_config {
-#     max_unavailable = 1
-#   }
+  update_config {
+    max_unavailable = 1
+  }
 
-#   labels = {
-#     role = "general"
-#   }
+  labels = {
+    role = "general"
+  }
 
 
-#   depends_on = [
-#     aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
-#     aws_iam_role_policy_attachment.nodes-AmazonEKS_CNI_Policy,
-#     aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
-#   ]
-# }
+  depends_on = [
+    aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.nodes-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
+  ]
+}
