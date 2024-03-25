@@ -74,7 +74,7 @@ resource "aws_eks_cluster" "argocdprj_eks" {
   depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy]
 }
 
-
+ 
 # resource "aws_eks_node_group" "private-nodes" {
 #   cluster_name    = aws_eks_cluster.argocdprj_eks.name
 #   node_group_name = "${var.name_prefix}private-nodes"
