@@ -11,8 +11,8 @@ variable "env" {
 }
 
 variable "vpc_cidr_block" {
-  default = "172.16.0.0/16"
-  type = string
+  default     = "172.16.0.0/16"
+  type        = string
   description = "CIDR"
 
 }
