@@ -4,6 +4,19 @@ variable "cluster-name" {
   default     = "argocdprj-eks"
 }
 
+variable "env" {
+  description = ""
+  type        = string
+  default     = "dev"
+}
+
+variable "vpc_cidr_block" {
+  default = "172.16.0.0/16"
+  type = string
+  description = "CIDR"
+
+}
+
 variable "name_prefix" {
   description = ""
   type        = string
