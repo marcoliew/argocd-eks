@@ -103,3 +103,5 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ${{ env.CONFIG_DIRECTORY }}
       run: terraform apply -auto-approve -input=false
+
+      
