@@ -42,20 +42,20 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'Terraform -> VPC/EKS'
+name: 'Terraform -> VPC/EKS DEV'
 
 on:
   push:
     branches: [ "main" ]
     paths:
-      - eks-setup/**
+      - eks-setup/env/dev/**
   pull_request:
 
 env:
   # TF_CLOUD_ORGANIZATION: "usydstaging"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   # TF_WORKSPACE: "argocd_eks"
-  CONFIG_DIRECTORY: "./eks-setup"
+  CONFIG_DIRECTORY: "./eks-setup/dev/dev"
 
 permissions:
   contents: read
