@@ -55,7 +55,7 @@ env:
   # TF_CLOUD_ORGANIZATION: "usydstaging"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   # TF_WORKSPACE: "argocd_eks"
-  CONFIG_DIRECTORY: "./eks-setup/dev/dev"
+  CONFIG_DIRECTORY: "./eks-setup/env/dev"
 
 permissions:
   contents: read
