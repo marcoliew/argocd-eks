@@ -1,6 +1,6 @@
 
 resource "aws_iam_role" "eks_role" {
-  name = "${name_prefix}-eks-cluster-role"
+  name = "${local.name_prefix}-eks-cluster-role"
 
   assume_role_policy = <<EOF
 {
@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "eks_AmazonEKSClusterPolicy" {
 }
 
 resource "aws_iam_role" "nodes_role" {
-  name = "${name_prefix}-eks-nodes-role"
+  name = "${local.name_prefix}-eks-nodes-role"
 
   assume_role_policy = <<EOF
 {
@@ -78,7 +78,7 @@ resource "aws_eks_cluster" "argocdprj_eks" {
 
 resource "aws_eks_node_group" "private_nodes" {
   cluster_name    = aws_eks_cluster.argocdprj_eks.name
-  node_group_name = "${name_prefix}-private-nodes"
+  node_group_name = "${local.name_prefix}-private-nodes"
   node_role_arn   = aws_iam_role.nodes_role.arn
 
   subnet_ids = [

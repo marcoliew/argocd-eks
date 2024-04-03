@@ -12,7 +12,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public-ap-southeast-2a.id
 
   tags = {
-    Name = "${name_prefix}_nat"
+    Name = "${local.name_prefix}_nat"
   }
 
   depends_on = [aws_internet_gateway.igw]
