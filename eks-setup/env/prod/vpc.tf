@@ -1,6 +1,6 @@
 
 locals {
-  name_prefix = "${var.app_name}-${var.env}"
+  name_prefix = "${var.app_name}${var.env}"
 }
 
 resource "aws_vpc" "main" {
