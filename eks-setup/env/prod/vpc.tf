@@ -2,6 +2,7 @@
 locals {
   name_prefix = "${var.app_name}-${var.env}"
 }
+
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
 

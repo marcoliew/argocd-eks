@@ -7,11 +7,11 @@ variable "cluster-name" {
 variable "env" {
   description = ""
   type        = string
-  default     = "dev"
+  default     = "prod"
 }
 
 variable "vpc_cidr_block" {
-  default     = "172.16.0.0/16"
+  default     = "172.26.0.0/16"
   type        = string
   description = "CIDR"
 
