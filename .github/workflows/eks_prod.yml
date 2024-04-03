@@ -42,7 +42,7 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'Terraform -> VPC/EKS DEV'
+name: 'Terraform -> VPC/EKS PROD'
 
 on:
   push:

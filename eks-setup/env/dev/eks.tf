@@ -1,7 +1,3 @@
-locals {
-  name_prefix = "${var.app_name}-${var.env}"
-}
-
 resource "aws_iam_role" "eks_role" {
   name = "${name_prefix}-eks-cluster-role"
 

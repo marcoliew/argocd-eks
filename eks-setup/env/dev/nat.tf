@@ -1,7 +1,3 @@
-locals {
-  name_prefix = "${var.app_name}-${var.env}"
-}
-
 resource "aws_eip" "nat" {
   vpc = true
 

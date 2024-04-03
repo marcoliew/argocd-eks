@@ -1,6 +1,3 @@
-locals {
-  name_prefix = "${var.app_name}-${var.env}"
-}
 
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
