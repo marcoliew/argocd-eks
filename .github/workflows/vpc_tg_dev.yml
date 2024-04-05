@@ -80,7 +80,7 @@ jobs:
     - name: Setup Terraform terraform_version 1.6.1
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 1.6.1
+        #terraform_version: 1.6.1
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
         terraform_wrapper: true
     
@@ -92,7 +92,7 @@ jobs:
     - name: Setup Terragrunt version 0.52.1
       uses: autero1/action-terragrunt@v3
       with:
-        terragrunt-version: 0.52.1
+        terragrunt-version: 0.56.2
         token: ${{ secrets.GITHUB_TOKEN }}
 
     # Initialize a new or existing Terragrunt working directory by creating initial files, loading any remote state, downloading modules, etc.
