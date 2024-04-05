@@ -77,9 +77,10 @@ jobs:
       uses: actions/checkout@v4
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
+    - name: Setup Terraform terraform_version 1.2.6
       uses: hashicorp/setup-terraform@v1
       with:
+        terraform_version: 1.2.6
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
         terraform_wrapper: true
     
@@ -88,10 +89,10 @@ jobs:
     - name: Setup Terraform wrapper path
       run: which terraform
   
-    - name: Setup Terragrunt version 0.55.2
+    - name: Setup Terragrunt version 0.52.1
       uses: autero1/action-terragrunt@v3
       with:
-        terragrunt-version: 0.56.2
+        terragrunt-version: 0.52.1
         token: ${{ secrets.GITHUB_TOKEN }}
 
     # Initialize a new or existing Terragrunt working directory by creating initial files, loading any remote state, downloading modules, etc.
