@@ -22,8 +22,7 @@ terraform {
     organization = "${local.tfc_organization}"
 
     workspaces {
-      project = "${local.prj}"
-      name = "${local.version}-${local.resource}-${local.env}"
+      name = "v4-vpc-dev"
     }
   }
 
