@@ -25,7 +25,6 @@ terraform {
       name = "v4-vpc-dev"
     }
   }
-
 }
 
 EOF
