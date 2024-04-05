@@ -88,10 +88,10 @@ jobs:
     - name: Setup Terraform wrapper path
       run: which terraform
   
-    - name: Setup Terragrunt version 0.21.13
-      uses: autero1/action-terragrunt@v1.1.0
+    - name: Setup Terragrunt version 0.55.2
+      uses: autero1/action-terragrunt@v3
       with:
-        terragrunt_version: 0.21.13
+        terragrunt-version: 0.55.2
         # token: ${{ secrets.GITHUB_TOKEN }}
 
     # # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
