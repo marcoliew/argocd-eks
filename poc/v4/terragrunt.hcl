@@ -26,6 +26,5 @@ terraform {
     }
   }
 }
-
 EOF
 }
