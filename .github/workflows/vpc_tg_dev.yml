@@ -110,6 +110,6 @@ jobs:
     - name: Terragrunt Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ${{ env.CONFIG_DIRECTORY }}
-      run: terragrunt apply #-auto-approve -input=false
+      run: terragrunt apply -auto-approve -input=false
 
       
