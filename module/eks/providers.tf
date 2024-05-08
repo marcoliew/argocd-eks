@@ -1,0 +1,87 @@
+provider "aws" {
+  default_tags {
+    tags = local.tags
+  }
+  profile = "default"
+  region  = local.region
+}
+
+terraform {
+  required_version = ">= 1.3"
+
+  required_providers {
+
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 5.0"
+    }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.20"
+    }
+
+    helm = {
+      source  = "hashicorp/helm"
+      version = ">= 2.9"
+    }
+  #   kubectl = {
+  #     source  = "gavinbunney/kubectl"
+  #     version = "1.14.0"
+  #   }
+  #   local = {
+  #     version = "2.5.1"
+  #   }
+  }
+}
+
+
+# provider "kubernetes" {
+#   host                   = local.eks_cluster_endpoint
+#   cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks_cluster.certificate_authority[0].data)
+#   token                  = data.aws_eks_cluster_auth.this.token
+# }
+
+# provider "helm" {
+#   kubernetes {
+#     host                   = local.eks_cluster_endpoint
+#     cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks_cluster.certificate_authority[0].data)
+#     token                  = data.aws_eks_cluster_auth.this.token
+#   }
+# }
+
+# provider "kubectl" {
+#   apply_retry_count      = 10
+#   host                   = local.eks_cluster_endpoint
+#   cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks_cluster.certificate_authority[0].data)
+#   load_config_file       = false
+#   token                  = data.aws_eks_cluster_auth.this.token
+# }
+
+# locals {
+#   tags = {
+#     created-by = "eks-workshop-v2"
+#     env        = var.eks_cluster_id
+#   }
+
+#   eks_cluster_id            = data.aws_eks_cluster.eks_cluster.id
+#   eks_oidc_issuer_url       = replace(data.aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer, "https://", "")
+#   eks_cluster_endpoint      = data.aws_eks_cluster.eks_cluster.endpoint
+#   eks_cluster_version       = data.aws_eks_cluster.eks_cluster.version
+#   eks_oidc_provider_arn     = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.eks_oidc_issuer_url}"
+#   cluster_security_group_id = data.aws_eks_cluster.eks_cluster.vpc_config[0].cluster_security_group_id
+
+#   addon_context = {
+#     aws_caller_identity_account_id = data.aws_caller_identity.current.account_id
+#     aws_caller_identity_arn        = data.aws_caller_identity.current.arn
+#     aws_eks_cluster_endpoint       = local.eks_cluster_endpoint
+#     aws_partition_id               = data.aws_partition.current.partition
+#     aws_region_name                = data.aws_region.current.name
+#     eks_cluster_id                 = local.eks_cluster_id
+#     eks_oidc_issuer_url            = local.eks_oidc_issuer_url
+#     eks_oidc_provider_arn          = local.eks_oidc_provider_arn
+#     tags                           = {}
+#     irsa_iam_role_path             = "/"
+#     irsa_iam_permissions_boundary  = ""
+#   }
+# }
